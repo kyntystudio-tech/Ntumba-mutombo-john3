@@ -1,0 +1,102 @@
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NTUMBA MUTOMBO JOHN — Star</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#f59e0b; --text:#e6eef8;
+      --glass: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:linear-gradient(180deg,#071129 0%, #091827 100%); color:var(--text); display:flex; min-height:100vh; align-items:center; justify-content:center; padding:24px}
+    .card{width:100%; max-width:900px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius:16px; box-shadow:0 10px 30px rgba(2,6,23,0.6); overflow:hidden; display:grid; grid-template-columns: 1fr 380px; gap:0}
+    @media (max-width:880px){ .card{grid-template-columns:1fr; } }.left{padding:36px; display:flex; flex-direction:column; gap:18px; justify-content:center}
+.title{font-size:28px; font-weight:700; letter-spacing:0.4px}
+.subtitle{color:rgba(230,238,248,0.7); font-size:15px}
+.bio{margin-top:8px; color:rgba(230,238,248,0.85); line-height:1.5}
+
+.right{background:var(--card); display:flex; align-items:center; justify-content:center; padding:20px}
+.portrait{width:100%; max-width:320px; border-radius:14px; overflow:hidden; position:relative; box-shadow:0 8px 30px rgba(2,6,23,0.6);}
+.portrait img{display:block; width:100%; height:auto; vertical-align:middle}
+
+.nameplate{position:absolute; left:12px; right:12px; bottom:12px; background:linear-gradient(90deg, rgba(1,1,1,0.6), rgba(1,1,1,0.2)); padding:12px 14px; border-radius:10px; backdrop-filter: blur(6px); display:flex; align-items:center; justify-content:space-between}
+.star-name{font-weight:700; font-size:18px; color:white}
+.tag{font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(245,158,11,0.12); color:var(--accent); font-weight:600}
+
+.controls{display:flex; gap:10px; margin-top:14px}
+.btn{border:0; padding:10px 14px; border-radius:10px; font-weight:600; cursor:pointer}
+.btn-primary{background:var(--accent); color:#071129}
+.btn-ghost{background:var(--glass); color:var(--text)}
+
+.credit{font-size:12px; color:rgba(230,238,248,0.6); margin-top:10px}
+
+/* subtle hover */
+.portrait:hover{transform:translateY(-6px); transition:transform .35s cubic-bezier(.2,.9,.3,1)}
+.portrait{transition:transform .35s cubic-bezier(.2,.9,.3,1)}
+
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <section class="left">
+      <div>
+        <div class="title">NTUMBA MUTOMBO JOHN </div>
+        <div class="subtitle">juriste —  Personnalité publique</div>
+        <p class="bio">Bienvenue sur la page officielle temporaire de NTUMBA MUTOMBO John
+        </p><div class="controls">
+      <button class="btn btn-primary" id="downloadBtn">Télécharger la photo</button>
+      <button class="btn btn-ghost" id="shareBtn">Partager</button>
+    </div>
+    <div class="credit"> 
+    </div>
+  </div>
+</section>
+
+<aside class="right">
+  <figure class="portrait">
+    <!-- Remplacez src ci-dessous par le chemin de votre image -->
+    <img id="starImage" src="images/ntumba.jpg" alt="Photo de NTUMBA MUTOMBO"/>
+    <figcaption class="nameplate">
+      <div class="star-name">NTUMBA MUTOMBO john </div>
+      <div class="tag">STAR</div>
+    </figcaption>
+  </figure>
+</aside>
+
+  </main>  <script>
+    // Téléchargement simple : récupère l'image affichée et lance le téléchargement
+    const downloadBtn = document.getElementById('downloadBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const img = document.getElementById('starImage');
+
+    downloadBtn.addEventListener('click', async () => {
+      try {
+        const url = img.src;
+        // si source locale/file:// il faudra remplacer par URL utilisable
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ntumba-mutombo.jpg';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } catch (e) {
+        alert('Impossible de télécharger l\'image depuis cette source. Remplacez-la par une URL publique.');
+      }
+    });
+
+    shareBtn.addEventListener('click', async () => {
+      const pageTitle = document.title;
+      const pageUrl = location.href;
+      if (navigator.share){
+        navigator.share({title: pageTitle, text: 'Regardez NTUMBA MUTOMBO', url: pageUrl}).catch(()=>{});
+      } else {
+        // fallback : copie le lien
+        try{
+          await navigator.clipboard.writeText(pageUrl);
+          alert('Lien copié dans le presse-papier');
+        } catch { alert('Copiez manuellement l\'URL de la page.'); }
+      }
+    });
+  </script></body>
+</html>
